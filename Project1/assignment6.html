@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 6</title>
+    <link rel="stylesheet" href="titlepage.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.0/jszip.min.js"></script>
+</head>
+
+<body>
+    <center>
+        <h1 class="title">Assignment 6</h1>
+    </center>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>Author</th>
+            <th>Project Summary</th>
+            <th>URL</th>
+            <th>CMMI_level</th>
+            <th>TRL_level</th>
+            <th>comments</th>
+            <th>questions_for_author</th>
+            <th>CMMI_recommendations</th>
+            <th>TRL_recommendations</th>
+
+        </tr>
+        <tr>
+            <td>Frankely Rodriguez Amparo </td>
+            <td>Project is focusing on challenges of consuming API through different coding techniques.
+                Integrated Openweather API in web applications using 3 different frameworks PHP, Python, and JS.</td>
+            <td><a>https://167.99.253.247/csc543/rodriguezaf1/Assigment_5/home.html</a></td>
+            <td>5</td>
+            <td>8</td>
+            <td>This project is great and implemented all 3 options in triple modular strategy and used 3 different
+                languages and frameworks to implement it.</td>
+            <td>How did you implement different cloud icons/images based on different weather conditions?</td>
+            <td>Everything is good, along with latitude and longitude you could have added city or state for better user
+                experience.</td>
+            <td>You can add UI validations for longitude and latitude fields for wrong user inputs.</td>
+        </tr>
+        <tr>
+            <td>Pierre Gustave </td>
+            <td>This project is about understanding what is web frameworks and how it works. Used 3 different frameworks
+                for implementation of temperature conversion (Angular, Laravel and Html with PHP).</td>
+            <td><a>https://167.99.253.247/csc543/rodriguezaf1/Assigment_5/home.html</a></td>
+            <td>5</td>
+            <td>6</td>
+            <td>Each Implementation is working fine and have given detailed descriptions about each of the mentioned
+                frameworks.</td>
+            <td>I have no questions and everything looks good.</td>
+            <td>you could have added more diffirent temperature conversions.</td>
+            <td>Good work and this implementation can be expanded to bigger applications like conversion app with
+                different conversion options like currency and weigh metrics and more.</td>
+        </tr>
+        <tr>
+            <td>Ian Cheung </td>
+            <td>Project is about Internet of Things with different operating systems and browsers. Using different
+                implementations and visualizations to present research findings.</td>
+            <td><a>https://167.99.253.247/csc543/cheungi1/Project%201/</a></td>
+            <td>5</td>
+            <td>6</td>
+            <td>I have learnt many new operating system and framework names which I never heard before, in your
+                implementations. I liked the idea of your different data visualizations and charts.</td>
+            <td>what made you to pick IOT?</td>
+            <td>I have enjoyed your research finidings.You could have given example of some widely used IOT applications
+                design.</td>
+            <td>You could have described much about importance of IOT in current technology trends.</td>
+        </tr>
+        <tr>
+            <td>Q Thompson</td>
+            <td>Using 3 different APIs, integrating them with web applications and displaying the APIs response in UI.
+            </td>
+            <td><a>https://167.99.253.247/csc543/thompsonq4/index.html</a></td>
+            <td>5</td>
+            <td>8</td>
+            <td>Your UI designs, API Implementations and your research findings given in summary page are impressive.
+            </td>
+            <td>how did you handle API key masking in your project?</td>
+            <td>I really do not have any recommendations and everything looks fine.</td>
+            <td>You could have given technical description about API Integrations.</td>
+        </tr>
+        <tr>
+            <td>Thomas Sullivan </td>
+            <td>Making web development more accessible for peopls with varying skills and learning to use tools
+                effectively to achieve desired outcome.</td>
+            <td><a>https://167.99.253.247/csc543/sullivant20/Project1_Landing_Page.html</a></td>
+            <td>5</td>
+            <td>7</td>
+            <td>Research problem and UI design looks good.</td>
+            <td>Did you take any inputs from students for this project?</td>
+            <td>Any specific use cases that are used for this project?</td>
+            <td>No Recommendations</td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <button class="button-2" onclick="downloadCSVasZIP()">Download Zip</button>
+    <button class="button-2" onclick="downloadCSV()">Download CSV</button>
+    <h2>Demo Video <video src=""></video> </h2>
+    <video width="640" height="360" controls>
+        <source src="Assignment6.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        
+        function downloadCSVasZIP() {
+            const csvFilePath = 'assignment6.csv';
+            const zip = new JSZip();
+
+            fetch(csvFilePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch CSV file: ${response.status} ${response.statusText}`);
+                    }
+                    return response.blob(); // Use response.blob() to get the CSV content as a Blob
+                })
+                .then(csvBlob => {
+                    // Add the CSV Blob to the ZIP archive with the desired filename
+                    zip.file("assignment6.csv", csvBlob, { binary: true });
+
+                    // Generate the ZIP file asynchronously
+                    return zip.generateAsync({ type: "blob" });
+                })
+                .then(zipBlob => {
+                    // Create a link element to trigger the download of the ZIP file
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(zipBlob);
+                    link.download = "assignment6.zip"; // Set desired filename for the downloaded ZIP file
+
+                    document.body.appendChild(link);
+                    link.click();
+
+                    // Clean up after the download link is clicked
+                    document.body.removeChild(link);
+                })
+                .catch(error => {
+                    console.error("Error downloading CSV as ZIP:", error);
+                    alert("Failed to download the ZIP file. Please check console for details.");
+                });
+        }
+        function downloadCSV() {
+    const table = document.querySelector('table'); // Select the table element
+    const rows = table.querySelectorAll('tr'); // Get all table rows
+
+    let csvContent = 'Author,Project Summary,URL,CMMI_level,TRL_level,comments,questions_for_author,CMMI_recommendations,TRL_recommendations\n';
+
+    for (let i = 1; i < rows.length; i++) {
+        const cells = rows[i].querySelectorAll('td'); // Get cells of each row
+        const rowData = [];
+
+        cells.forEach(cell => {
+            // Clean up cell content and enclose in quotes if needed
+            let cellText = cell.textContent.trim().replace(/"/g, '""'); // Escape double quotes
+            if (cellText.includes(',') || cellText.includes('\n')) {
+                cellText = `"${cellText}"`; // Enclose in quotes if contains commas or newlines
+            }
+            rowData.push(cellText);
+        });
+
+        csvContent += rowData.join(',') + '\n'; // Concatenate row data with commas
+    }
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'assignments.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+    </script>
+
+   
+
+</body>
+
+
+</html>

@@ -1,0 +1,193 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    align-items: center;
+}
+
+.refbody {
+    font-family: Arial, sans-serif;
+    background-color: #f8f3f3;
+    align-items: center;
+}
+
+.container {
+    align-items: center;
+    text-align: center;
+    max-width: 600px;
+    /* Set your desired maximum width */
+    margin: 0 auto;
+    /* Center the container horizontally */
+    margin-top: 50px;
+    /* Adjust as needed */
+    padding: 100px;
+    border-radius: 50px;
+    background-color: #c747e6f5;
+    box-shadow: 0 0 10px rgba(230, 223, 223, 0.1);
+}
+.refcontainer {
+    
+    max-width: 600px;
+    /* Set your desired maximum width */
+    margin: 0 auto;
+    /* Center the container horizontally */
+    margin-top: 50px;
+    /* Adjust as needed */
+    padding: 100px;
+    border-radius: 50px;
+    background-color: #cbefa7f5;
+    box-shadow: 0 0 10px rgba(230, 223, 223, 0.1);
+}
+
+
+.title {
+    color: rgb(15, 15, 16);
+    font-size: xx-large;
+    margin-top: 20px;
+
+}
+
+.author {
+    font-style: italic;
+    color: rgb(22, 22, 23);
+    margin-top: 20px;
+}
+
+.info {
+    margin-top: 20px;
+    color: #1d1d1e;
+    margin-top: 20px;
+}
+
+.university {
+    color: #1b1b1c;
+    margin-top: 20px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.slider {
+    display: flex;
+    overflow: hidden;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.myslide {
+    display: none;
+
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+button {
+    margin-top: 20px;
+    background: transparent;
+
+}
+
+.prev {
+    float: left;
+}
+
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.toggletext {
+    color: #eb70ed;
+}
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: #eb70ed ;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(246, 218, 244, 0.8);
+}
+
+select,
+input {
+    padding: 10px;
+    margin: 20px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Styles for title page theme */
+.custom-button {
+    background-color: #eb70ed; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.custom-button:hover {
+    background-color: rgba(246, 218, 244, 0.8); /* Darker green */
+}
+
+
+
+
+
+.explanation {
+    display: none;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f7dbed;
+    
+}
+
+.expandButton {
+    margin-top: 10px;
+    cursor: pointer;
+    color: rgb(231, 229, 239);
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+

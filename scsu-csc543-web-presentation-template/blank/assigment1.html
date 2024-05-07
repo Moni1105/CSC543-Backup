@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="author" content="Phil Barello" />
+  <title>Presentation Template</title>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="scripts/slidy.css" /> <!-- http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css -->
+  <script src="scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script> <!-- http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js-->
+  <script src="scripts/jquery-3.3.1.min.js"
+    charset="utf-8" type="text/javascript"></script> <!-- https://code.jquery.com/jquery-3.3.1.min.js -->
+  <script type="text/javascript" src="scripts/qrcode.js"></script>
+</head>
+
+<style>
+
+  /* two-colomn layout */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Create two equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .right-side-image {
+    float: right;
+    width: 300px;
+    border: 0px solid #004480;
+    padding: 10px;
+  }
+
+  /* global properties to apply to all images */
+  .img {
+    float: left;
+  }
+
+  /* qrcode generator image size */
+  #qrcode {
+    width:160px;
+    height:160px;
+    margin-top:15px;
+  }
+
+  /* email link */
+  a.email:link {color:#eeff00;}
+  a.email:hover {color:#ff00ee; background:#66ff66;}
+</style>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Assignment 1</h1>
+  <p><font color = "#000080"><p class="author">Mahalakshmi Somasundaram</p></font>
+  <p class="date">CSC 543: Web Programming <br>Computer Science Department <br><font color = "#8080FF" style="text-shadow:-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Southern Connecticut State University</font></p>
+  <button id="view-fullscreen">*</button>
+  <script type="text/javascript">
+    (function () {
+        var viewFullScreen = document.getElementById("view-fullscreen");
+        if (viewFullScreen) {
+            viewFullScreen.addEventListener("click", function () {
+                var docElm = document.documentElement;
+                if (docElm.requestFullscreen) {
+                    docElm.requestFullscreen();
+                }
+                else if (docElm.msRequestFullscreen) {
+                    docElm = document.body; //overwrite the element (for IE)
+                    docElm.msRequestFullscreen();
+                }
+                else if (docElm.mozRequestFullScreen) {
+                    docElm.mozRequestFullScreen();
+                }
+                else if (docElm.webkitRequestFullScreen) {
+                    docElm.webkitRequestFullScreen();
+                }
+            }, false);
+        }
+
+        var cancelFullScreen = document.getElementById("cancel-fullscreen");
+        if (cancelFullScreen) {
+            cancelFullScreen.addEventListener("click", function () {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+                else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+                else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                }
+                else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                }
+            }, false);
+        }
+
+        var fullscreenState = document.getElementById("fullscreen-state");
+        if (fullscreenState) {
+            document.addEventListener("fullscreenchange", function () {
+                fullscreenState.innerHTML = (document.fullscreenElement)? "" : "not ";
+            }, false);
+
+            document.addEventListener("msfullscreenchange", function () {
+                fullscreenState.innerHTML = (document.msFullscreenElement)? "" : "not ";
+            }, false);
+
+            document.addEventListener("mozfullscreenchange", function () {
+                fullscreenState.innerHTML = (document.mozFullScreen)? "" : "not ";
+            }, false);
+
+            document.addEventListener("webkitfullscreenchange", function () {
+                fullscreenState.innerHTML = (document.webkitIsFullScreen)? "" : "not ";
+            }, false);
+        }
+
+    })();
+    </script>
+</div>
+<div class="section slide level1" id="this">
+  <h1>Summarize your previous experience with web programming, however extensive or limited?</h1>
+  <ul class="incremental">
+  <ul>&quot;In last semester as one of my course work, I worked on developing web application using python flask framework integrated with Mysql workbench. This project provided me with hands-on experience in HTML, CSS, and Javascript, as well as proficiency in Python for back-end development. Also I have worked on few tools such as selenium and cypress for automating web applications for test scenarios. This practical exposure enabled me to gain expertise in web elements traversal and reinforced my understanding of the intricacies involved in developing and testing web-based solutions.&quot;
+</div>
+<div class="section slide level1" id="that">
+  <h1>Indicate any code editors, frameworks data sources, file transfer utilities, web browsers, hardware, networks, and software you plan to use to complete CSC 543 coursework?</h1>
+
+  <ul class="incremental">
+  <li>Microsoft visual studio code</li>
+  <li>Python</li>
+  <li>Flask</li>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+  <li>Filezilla</li>
+  <li>Jinja2 template</li>
+  <li>Bootstrap</li>
+  <li>Mysql</li>
+  </ul></li>
+</div>
+<div class="section slide level1" id="that">
+  <h1>Indicate any web development frameworks you are interested in exploring further?</h1>
+
+  <ul class="incremental">
+  <li>AngularJs</li>
+  <li>React</li>
+  <li>Django</li>
+  <li>Ruby on Rails</li>
+  </ul></li>
+</div>
+<div class="section slide level1" id="this">
+  <h1>Describe any personal or professional projects you are currently considering or working on that may benefit from web programming?</h1>
+  <ul class="incremental">
+  <ul>&quot;As of now, I'm not actively working on a specific personal or professional project, but I'm considering and exploring ideas that align with my interests in web programming and creating a sample web application that helps me to learn new and advanced web programming skills.&quot;
+</div>
+<div class="section slide level1" id="this">
+  <h1>Indicate any resources you recommend for others to become more familiar with your personal or professional interests?</h1>
+  <ul class="incremental">
+  <ul>&quot;<a href="https://flask.palletsprojects.com/en/3.0.x/">https://flask.palletsprojects.com/en/3.0.x/</a>
+    Above is the official documentation for learning and setting up flask based projects. Some other general sites that I mostly used are stack overflow, youtube, coursera, Udemy etc.&quot;
+</div>
+<div class="section slide level1" id="this">
+  <h1>Summarize what you intend to do with web programming throughout and beyond CSC 543?</h1>
+  <ul class="incremental">
+  <ul>&quot;I will seek for positions as a web application developer, where I can leverage and enhance my web programming skills in a professional environment. In these roles, I aim to actively contribute to the development of various digital solutions, including web applications and websites.&quot;
+</div>
+</body>
+</html>

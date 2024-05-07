@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="Phil Barello" />
+    <title>Presentation Template</title>
+    <link rel="stylesheet" type="text/css" media="screen, projection, print" href="scripts/slidy.css" />
+    <!-- http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css -->
+    <script src="scripts/slidy.js" charset="utf-8" type="text/javascript"></script>
+    <!-- http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js-->
+    <script src="scripts/jquery-3.3.1.min.js" charset="utf-8" type="text/javascript"></script>
+    <!-- https://code.jquery.com/jquery-3.3.1.min.js -->
+    <script type="text/javascript" src="scripts/qrcode.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  </head>
+  <style>
+    /* two-colomn layout */
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: 300px;
+      /* Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .right-side-image {
+      float: right;
+      width: 300px;
+      border: 0px solid #004480;
+      padding: 10px;
+    }
+
+    /* global properties to apply to all images */
+    .img {
+      float: left;
+    }
+
+    /* qrcode generator image size */
+    #qrcode {
+      width: 160px;
+      height: 160px;
+      margin-top: 15px;
+    }
+
+    .collapsible {
+      background-color: #777;
+      color: white;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .active,
+    .collapsible:hover {
+      background-color: #555;
+    }
+
+    .content {
+      padding: 0 18px;
+      display: none;
+      overflow: hidden;
+      background-color: #f1f1f1;
+    }
+    table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 2px;
+  font-size: small;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+    /* email link */
+    a.email:link {
+      color: #eeff00;
+    }
+
+    a.email:hover {
+      color: #ff00ee;
+      background: #66ff66;
+    }
+  </style>
+  <body>
+    <div class="slide titlepage" id="slide1">
+      <h1 class="title">Assignment 2</h1>
+      <p>
+        <font color="#000080">
+          <p class="author">Mahalakshmi Somasundaram</p>
+        </font>
+      <p class="date">CSC 543: Web Programming <br>Computer Science Department <br>
+        <font color="#8080FF" style="text-shadow:-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Southern Connecticut State University</font>
+      </p>
+      <button id="view-fullscreen">*</button>
+      <script type="text/javascript">
+        (function() {
+          var viewFullScreen = document.getElementById("view-fullscreen");
+          if (viewFullScreen) {
+            viewFullScreen.addEventListener("click", function() {
+              var docElm = document.documentElement;
+              if (docElm.requestFullscreen) {
+                docElm.requestFullscreen();
+              } else if (docElm.msRequestFullscreen) {
+                docElm = document.body; //overwrite the element (for IE)
+                docElm.msRequestFullscreen();
+              } else if (docElm.mozRequestFullScreen) {
+                docElm.mozRequestFullScreen();
+              } else if (docElm.webkitRequestFullScreen) {
+                docElm.webkitRequestFullScreen();
+              }
+            }, false);
+          }
+          var cancelFullScreen = document.getElementById("cancel-fullscreen");
+          if (cancelFullScreen) {
+            cancelFullScreen.addEventListener("click", function() {
+              if (document.exitFullscreen) {
+                document.exitFullscreen();
+              } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+              } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+              } else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+              }
+            }, false);
+          }
+          var fullscreenState = document.getElementById("fullscreen-state");
+          if (fullscreenState) {
+            document.addEventListener("fullscreenchange", function() {
+              fullscreenState.innerHTML = (document.fullscreenElement) ? "" : "not ";
+            }, false);
+            document.addEventListener("msfullscreenchange", function() {
+              fullscreenState.innerHTML = (document.msFullscreenElement) ? "" : "not ";
+            }, false);
+            document.addEventListener("mozfullscreenchange", function() {
+              fullscreenState.innerHTML = (document.mozFullScreen) ? "" : "not ";
+            }, false);
+            document.addEventListener("webkitfullscreenchange", function() {
+              fullscreenState.innerHTML = (document.webkitIsFullScreen) ? "" : "not ";
+            }, false);
+          }
+        })();
+      </script>
+    </div>
+    <div class="section slide level1" id="slide2">
+      <h1>R2. Analyzing Responses</h1>
+      <section id="section1">
+      <button type="button" class="collapsible">Code Editors</button>
+      <div class="content" style="height: 600px;">
+        <div class="row">  
+          <div class="column">
+            <canvas id="myChart" style="width:100%;max-width:600px;height: 300px;"></canvas>
+            <script>
+              var xValues = ["VS Code", "Notepad++", "Notepad", "BlueJ", "BBEdit"];
+              var yValues = [23, 3, 2, 1, 1];
+              var barColors = ["red", "green", "blue", "orange", "brown"];
+              new Chart("myChart", {
+                type: "bar",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                  }]
+                },
+                options: {
+                  legend: {
+                    display: false
+                  },
+                  title: {
+                    display: true,
+                    text: "Code Editor Preferences CSC543"
+                  }
+                }
+              });
+            </script>
+          </div>
+          <div class="column">
+            <h3>Additional Info on code editors</h3>
+              <table style="width:100%">
+                <tr>
+                  <th>Editor</th>
+                  <th>Resources</th>
+                  <th>Count Preferred</th>
+                </tr>
+                <tr>
+                  <td><img src="images/visual-studio-code.png" alt="" height=50 width=50>Visual Studio Code</img></td>
+                  <td>
+                    <a target="_blank" href="https://code.visualstudio.com/learn">Link 1</a>
+                    <br>
+                    <a target="_blank" href="https://en.wikipedia.org/wiki/Visual_Studio_Code">Link 2</a>
+                  </td>
+                  <td>23</td>
+                </tr>
+                <tr>
+                  <td><img src="images/notepadplus.png" alt="" height=50 width=50>Notepad++</img></td>
+                  <td>
+                    <a target="_blank" href="https://www.wikihow.com/Use-Notepad">Link 1</a>
+                    <br>
+                    <a target="_blank" href="https://npp-user-manual.org/docs/getting-started/">Link 2</a>
+                  </td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td><img src="images/Note_Pad_Image.jpg" alt="" height=50 width=50>Notepad</img></td>
+                  <td>
+                    <a target="_blank" href="https://en.wikipedia.org/wiki/Windows_Notepad">Link 1</a>
+  
+                  </td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td><img src="images/bluej_Icon.png" alt="" height=50 width=50>BlueJ</img></td>
+                  <td>
+                    <a target="_blank" href="https://www.bluej.org/doc/documentation.html">Link 1</a>
+                    <br>
+                    <a target="_blank" href="https://www.bluej.com/">Link 2</a>
+                  </td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td><img src="images/bbedit_Icon.png" alt="" height=50 width=50>BBEdit</img></td>
+                  <td>
+                    <a target="_blank" href="https://www.barebones.com/products/bbedit/">Link 1</a>
+                  </td>
+                  <td>1</td>
+                </tr>
+              </table>
+          </div>
+        </div>
+      </div>
+    </section>
+      <br>
+      <section id="section2">
+      <button type="button" class="collapsible">Programming Languages</button>
+      <div class="content" style="height: 600px;">
+        <div class="row">  
+          <div class="column">
+            <canvas id="chart2" style="width:100%;max-width:600px;height: 300px;"></canvas>
+            <script>
+              var xValues = ["JS/HTML/CSS", "Python", "Java/TS", "C/C++/C#/Ruby/Rust/GO"];
+              var yValues = [26, 11, 3, 1];
+              var barColors = ["red", "green", "blue", "orange"];
+              new Chart("chart2", {
+                type: "bar",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                  }]
+                },
+                options: {
+                  legend: {
+                    display: false
+                  },
+                  title: {
+                    display: true,
+                    text: "Programming language Preferences CSC543"
+                  }
+                }
+              });
+            </script>
+          </div>
+          <div class="column">
+            <h3>Additional Info on Programming languages</h3>
+              <table style="width:100%">
+                <tr>
+                  <th>Languages</th>
+                  <th>Resources</th>
+                  <th>Count Preferred</th>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/js_icon.png" alt="" height=30 width=30> Js</img>
+                    <img src="images/html_icon.png" alt="" height=30 width=30> HTML</img>
+                    <img src="images/css_icon.png" alt="" height=30 width=30> CSS</img>
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://www.w3schools.com/">Link 1</a>
+                    <br>
+                    <a target="_blank" href="https://www.tutorialspoint.com/">Link 2</a>
+                  </td>
+                  <td>26</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/python_icon.png" alt="" height=30 width=30>Python</img>
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://www.learnpython.org/">Link 1</a>
+                     </td>
+                  <td>11</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/java_icon.png" alt="" height=30 width=30> JAVA</img>
+                    <img src="images/ts_icon.png" alt="" height=30 width=30> TS</img>
+                  
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://www.w3schools.com/">Link 1</a>
+                    <br>
+                    <a target="_blank" href="https://www.tutorialspoint.com/">Link 2</a>
+  
+                  </td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Others</td>
+                  <td>
+                    <a target="_blank" href="https://www.geeksforgeeks.org/">Link 1</a>
+                    <br>
+                    <a target="_blank" href="https://www.codecademy.com/">Link 2</a>
+                  </td>
+                  <td>1</td>
+                </tr>
+              </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>
+      <section id="section3">
+      <button type="button" class="collapsible">Frameworks</button>
+      <div class="content" style="height: 600px;">
+        <div class="row">  
+          <div class="column">
+            <canvas id="chart3" style="width:100%;max-width:600px;height: 300px;"></canvas>
+            <script>
+              var xValues = ["React", "Django","Flask/Nodejs","Bootstrap/Angular", "Unity, Atom"];
+              var yValues = [12, 11, 9, 5,1];
+              var barColors = ["red", "green", "blue", "orange","brown"];
+              new Chart("chart3", {
+                type: "bar",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                  }]
+                },
+                options: {
+                  legend: {
+                    display: false
+                  },
+                  title: {
+                    display: true,
+                    text: "Framework Preferences CSC543"
+                  }
+                }
+              });
+            </script>
+          </div>
+          <div class="column">
+            <h3>Additional Info on Frameworks</h3>
+              <table style="width:100%">
+                <tr>
+                  <th>Frameworks</th>
+                  <th>Resources</th>
+                  <th>Count Preferred</th>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/react_icon.png" alt="" height=30 width=30> React</img>
+                      </td>
+                  <td>
+                    <a target="_blank" href="https://react.dev/">Link 1</a>
+                 </td>
+                  <td>12</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/django.png" alt="" height=30 width=30>Django</img>
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://www.djangoproject.com/start/">Link 1</a>
+                     </td>
+                  <td>11</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/flask_icon.png" alt="" height=30 width=30> Flask</img>
+                    <img src="images/nodejs_icon.png" alt="" height=30 width=30> Nodejs</img>
+                  
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://flask.palletsprojects.com/en/3.0.x/tutorial/layout/">Link 1</a>
+                    <br>
+                    <a target="_blank" href="https://www.w3schools.com/nodejs/">Link 2</a>
+  
+                  </td>
+                  <td>9</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/boostrap_icon.png" alt="" height=30 width=30> Boostrap</img>
+                    <img src="images/angular_icon.png" alt="" height=30 width=30> Angular</img>
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/">Link 1</a>
+                    <br>
+                    <a target="_blank" href="https://angular.io/tutorial">Link 2</a>
+                  </td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/unity_icon.png" alt="" height=30 width=30> Unity</img>
+                    <img src="images/atom_icon.png" alt="" height=30 width=30> Atom</img>
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://www.youtube.com/watch?v=XtQMytORBmM">Link 1</a>
+                    <br>
+                    <a target="_blank" href="https://careerkarma.com/blog/how-to-use-atom/">Link 2</a>
+                  </td>
+                  <td>1</td>
+                </tr>
+              </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>
+      <section id="section4">
+      <button type="button" class="collapsible">File Transfer Utility</button>
+      <div class="content" style="height: 600px;">
+        <div class="row">  
+          <div class="column">
+            <canvas id="chart4" style="width:100%;max-width:600px;height: 300px;"></canvas>
+            <script>
+              var xValues = ["Filezilla","WinSCP"];
+              var yValues = [20,1];
+              var barColors = ["red", "green"];
+              new Chart("chart4", {
+                type: "bar",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                  }]
+                },
+                options: {
+                  legend: {
+                    display: false
+                  },
+                  title: {
+                    display: true,
+                    text: "File Transfer Utility Preferences CSC543"
+                  }
+                }
+              });
+            </script>
+          </div>
+          <div class="column">
+            <h3>Additional Info on File Transfer Utilities</h3>
+              <table style="width:100%">
+                <tr>
+                  <th>File Transfer Utilities</th>
+                  <th>Resources</th>
+                  <th>Count Preferred</th>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/filezilla_icon (1).png" alt="" height=30 width=30> Filezilla</img>
+                      </td>
+                  <td>
+                    <a target="_blank" href="https://wiki.filezilla-project.org/FileZilla_Client_Tutorial_(en)">Link 1</a>
+                 </td>
+                  <td>20</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/WinSCP_icon.png" alt="" height=30 width=30>WinSCP</img>
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://winscp.net/eng/docs/guides">Link 1</a>
+                     </td>
+                  <td>1</td>
+                </tr>
+               </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>
+      <section id="section5">
+      <button type="button" class="collapsible">Operating System</button>
+      <div class="content" style="height: 600px;">
+        <div class="row">  
+          <div class="column">
+            <canvas id="chart5" style="width:100%;max-width:600px;height: 300px;"></canvas>
+            <script>
+              var xValues = ["Windows","MAC","Linux"];
+              var yValues = [6,2,1];
+              var barColors = ["red", "green","blue"];
+              new Chart("chart5", {
+                type: "bar",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                  }]
+                },
+                options: {
+                  legend: {
+                    display: false
+                  },
+                  title: {
+                    display: true,
+                    text: "Operating system Preferences CSC543"
+                  }
+                }
+              });
+            </script>
+          </div>
+          <div class="column">
+            <h3>Additional Info on Operating System</h3>
+              <table style="width:100%">
+                <tr>
+                  <th>Operating Systems</th>
+                  <th>Resources</th>
+                  <th>Count Preferred</th>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/microsoft_icon.png" alt="" height=30 width=30> Windows</img>
+                      </td>
+                  <td>
+                    <a target="_blank" href="https://www.microsoft.com/en-us/software-download/windows10">Link 1</a>
+                 </td>
+                  <td>6</td>
+                </tr>
+                <tr>
+                  <td>
+                    Mac OS
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://en.wikipedia.org/wiki/Mac_operating_systems">Link 1</a>
+                     </td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/linux_icon.png" alt="" height=30 width=30>Linux</img>
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://ubuntu.com/tutorials/command-line-for-beginners">Link 1</a>
+                     </td>
+                  <td>2</td>
+                </tr>
+               </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>
+      <section>
+      <button type="button" class="collapsible">Web Browsers</button>
+      <div class="content" style="height: 600px;">
+        <div class="row">  
+          <div class="column">
+            <canvas id="chart6" style="width:100%;max-width:600px;height: 300px;"></canvas>
+            <script>
+              var xValues = ["GoogleChrome","Firefox","MS Edge"];
+              var yValues = [21,9,3];
+              var barColors = ["red", "green","blue"];
+              new Chart("chart6", {
+                type: "bar",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                  }]
+                },
+                options: {
+                  legend: {
+                    display: false
+                  },
+                  title: {
+                    display: true,
+                    text: "Browser Preferences CSC543"
+                  }
+                }
+              });
+            </script>
+          </div>
+          <div class="column">
+            <h3>Additional Info on Browsers</h3>
+              <table style="width:100%">
+                <tr>
+                  <th>Browsers</th>
+                  <th>Resources</th>
+                  <th>Count Preferred</th>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/chrome_icon.png" alt="" height=30 width=30> Googlechrome</img>
+                      </td>
+                  <td>
+                    <a target="_blank" href="https://www.GoogleChrome.com/">Link 1</a>
+                 </td>
+                  <td>21</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/firefox_icon.png" alt="" height=30 width=30> Firefox</img>
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://Firefox.com/">Link 1</a>
+                     </td>
+                  <td>9</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/edge_icon.png" alt="" height=30 width=30> Edge</img>
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://www.bing.com/">Link 1</a>
+                     </td>
+                  <td>3</td>
+                </tr>
+               </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>
+      <section>
+      <button type="button" class="collapsible">Data Sources</button>
+      <div class="content" style="height: 600px;">
+        <div class="row">  
+          <div class="column">
+            <canvas id="chart7" style="width:100%;max-width:600px;height: 300px;"></canvas>
+            <script>
+              var xValues = ["mySQl","MariaDB","SQLAlchemy"];
+              var yValues = [6,2,1];
+              var barColors = ["red", "green","blue"];
+              new Chart("chart7", {
+                type: "bar",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                  }]
+                },
+                options: {
+                  legend: {
+                    display: false
+                  },
+                  title: {
+                    display: true,
+                    text: "Datasource Preferences CSC543"
+                  }
+                }
+              });
+            </script>
+          </div>
+          <div class="column">
+            <h3>Additional Info on data sources</h3>
+              <table style="width:100%">
+                <tr>
+                  <th>Data Sources</th>
+                  <th>Resources</th>
+                  <th>Count Preferred</th>
+                </tr>
+                <tr>
+                  <td>
+                    MYSql
+                      </td>
+                  <td>
+                    <a target="_blank" href="https://dev.mysql.com/doc/refman/8.0/en/tutorial.html">Link 1</a>
+                 </td>
+                  <td>6</td>
+                </tr>
+                <tr>
+                  <td>
+                    MariaDB
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://www.mariadbtutorial.com/">Link 1</a>
+                     </td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>
+                   SQLAlchemy
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://www.sqlalchemy.org/">Link 1</a>
+                     </td>
+                  <td>1</td>
+                </tr>
+               </table>
+          </div>
+        </div>
+      </div>
+    </section>   
+      <script>
+
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+
+        }
+      </script>
+       <h1>R3. select 3 options for each Parameter</h1>
+       <table style="width:100%">
+        <tr>
+          <th>Parameters</th>
+          <th>Options</th>
+          <th>Advantage</th>
+          <th>Disadvantage</th>
+          <th>why to prefer</th>
+          <th>Why to avoid</th>
+          <th>personal/professional exprience</th>
+        </tr>
+        <tr>
+          <td>
+            Code Editors
+              </td>
+          <td>
+            Vs code,
+            Notepad++,
+            Eclipse
+         </td>
+          <td>
+           <p>Vscode is opensource and supports multiple language like Python,Java,JS,TS etc.</p>
+          <p>NotePad++ is also opensource, lightweight and fast.It gives extensive plugin support.</p>
+          <p>Atom is also opensource developed by GitHub. It has modern interface 
+            and extensive customization option</p>.   
+         </td>
+         <td>
+          <p>In vscode, we may find debug complexity for setting up debugger for different languages.</p>
+          <p>NotePad++ lacks advance features that found in robust IDEs. Limited collaboration and platform support.</p>
+          <p>In Atom, users may encounter inconsistencies or differences in behavior across different operating systems.</p>
+         </td>
+         <td>
+        <p>Vscode, preferred for its robust features, extensive extension marketplace, built-in Git integration, IntelliSense for code completion,strong support for various programming languages and frameworks.</p>
+        <p>NotePad++ is for users who prefer a minimalist interface without extensive customization options or resource-heavy features.</p>
+        <p>In Atom, valued for its hackable nature, customization options, and vibrant package ecosystem.</p>
+         </td>
+         <td>
+          <p>VSCode for its Resource-intensive, steep learning curve.</p>
+          <p>For Notepad++, Limited features compared to modern IDEs, less suitable for large projects.</p>
+          <p>In Atom, performance issues, slower compared to other lightweight editors.</p>
+          </td>
+          <td>
+            <p>Vscode:I have used for learning python, Java and performing leetcode problems.</p>
+            <p>Notepad++:I have used to understand json, html , xml files because it has syntax highlighting</p>
+            <p>Atom:I never used it, but would like to try it soon.</p>
+          </td>
+        </tr>
+
+       <tr>
+          <td>
+            <p>Programming Languages</p>
+              </td>
+          <td>
+            JavaScript,
+            Python,
+            JAVA
+         </td>
+          <td>
+           <p>JavaScript: High browser compatibility, flexibility for client-side scripting and easy datastructure usage. </p>
+          <p>Python: Concise syntax, extensive standard library, and broad community support.</p>
+          <p>Java: Platform independence, strong type safety, and robust ecosystem for enterprise applications.</p>  
+         </td>
+         <td>
+          <p>JavaScript: Browser compatibility issues and asynchronous programming complexities.</p>
+          <p>Python: Performance limitations and slower execution speed compared to compiled languages.</p>
+          <p>Java: Verbosity of code and slower startup time for smaller applications.</p>
+         </td>
+         <td>
+        <p>JavaScript: Widely supported across browsers and versatile for both front-end and back-end development.</p>
+        <p>Python: Concise syntax, extensive standard library, and strong community support for various applications.</p>
+        <p>Java: Platform independence, robustness, and scalability, ideal for enterprise-level applications.</p>
+         </td>
+          <td>
+            <p>JavaScript: Limited debugging capabilities, asynchronous nature leading to callback hell, and potential security vulnerabilities.</p>
+            <p>Python: Slower execution speed compared to low-level languages, GIL (Global Interpreter Lock) limitations, and less suitable for high-performance computing tasks.</p>
+            <p>Java: Verbosity in code syntax, memory consumption, and slower startup time compared to other languages like Python or Go.</p>
+          </td>
+          <td>
+            <p>JavaScript: I have used it for web application development and also for browser automation.</p>
+            <p>Python: I recently started learning for personal knoweledge gain.</p>
+            <p>Java: Java I have used in workplace to create a utility(in house tool) that would help read a file and send report to the team.</p>
+          </td>
+        </tr>
+
+        
+       <tr>
+        <td>
+          <p>frameworks</p>
+            </td>
+        <td>
+          Django,
+          Angular,
+          React
+       </td>
+        <td>
+         <p>Django: Makes building websites faster and easier, with features like user logins, database management, and admin tools.</p>
+        <p>Angular: Helps create interactive web applications smoothly, handling data connections and organizing code neatly.</p>
+        <p>React: Simplifies website development by managing how content is shown, allowing for easy updates and better performance.</p>  
+       </td>
+       <td>
+        <p>Django: Initial learning curve due to its comprehensive features and setup requirements.</p>
+        <p>Angular: Complexity in managing large-scale projects and understanding its intricate architecture.</p>
+        <p>React: Frequent updates and changes in its ecosystem may lead to compatibility issues and require constant learning.</p>
+       </td>
+       <td>
+          <p>Django: Rapid development, robust security features, and extensive built-in functionalities streamline web application development.</p>
+          <p>Angular: Offers a structured framework for building dynamic single-page applications (SPAs) with enhanced code organization and maintainability.</p>
+          <p>React: Component-based architecture, virtual DOM rendering, and strong community support facilitate scalable and high-performance user interfaces</p>
+        </td>
+        <td>
+          <p>Django: Steeper learning curve for beginners and limitations in flexibility for highly customized applications</p>
+          <p>Angular: Complex setup and boilerplate code, potentially slower initial load times, and frequent updates leading to version compatibility issues</p>
+          <p>React: Requires additional libraries for state management and routing, leading to potential code bloat and increased complexity for smaller projects.</p>
+           </td>
+        <td>
+          <p>Django: Started learning recently for one of course work.</p>
+          <p>Angular: Applications which I have automated are Angular or AngularJs.</p>
+          <p>React: Never worked on this framework, so wanted to learn.</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>File Transfer Utility</p>
+            </td>
+        <td>
+          FileZilla,
+          WinSCP,
+          CyberDuck
+       </td>
+        <td>
+         <p>FileZilla: Easy-to-use interface with drag-and-drop functionality, supports FTP, FTPS, and SFTP protocols, cross-platform compatibility, open-source software.</p>
+        <p>WinSCP: Secure file transfers with support for SFTP, SCP, and FTP protocols, integrates well with Windows, offers scripting and automation capabilities.</p>
+        <p>CyberDuck: User-friendly interface with drag-and-drop functionality, supports various protocols like FTP, SFTP, WebDAV, integrates seamlessly with cloud storage services like Amazon S3 and Google Drive.</p>  
+       </td>
+       <td>
+        <p>FileZilla: Occasionally experiences compatibility issues with certain server configurations, lacks some advanced features found in enterprise-grade FTP clients.</p>
+        <p>WinSCP: Interface can be overwhelming for beginners, limited integration with cloud storage services compared to other FTP clients, primarily designed for Windows platforms.</p>
+        <p>CyberDuck: Limited support for advanced FTP configurations, occasional stability issues, may not offer as many features as other FTP clients for power users.</p>
+       </td>
+       <td>
+          <p>FileZilla: User-friendly interface, open-source software, supports various platforms including Windows, macOS, and Linux, offers robust FTP, FTPS, and SFTP support.</p>
+          <p>WinSCP:  Strong focus on security with its support for SFTP and SCP protocols, offers scripting and automation capabilities, actively maintained and updated.</p>
+          <p>CyberDuck: Intuitive user interface, supports a wide range of protocols including FTP, SFTP, WebDAV, and Amazon S3, integrates with cloud storage services like Dropbox and Google Drive, available for both macOS and Windows platforms.</p>
+        </td>
+        <td>
+          <p>FileZilla: Some users might find its interface outdated or less intuitive compared to modern alternatives.</p>
+          <p>WinSCP: While it's highly secure, its advanced features and focus on SSH-based protocols may be overwhelming for less experienced users.</p>
+          <p>CyberDuck: Despite its user-friendly interface, Cyberduck lacks some advanced features found in other clients, limiting its utility for power users with specific requirements.</p>
+           </td>
+        <td>
+          <p>FileZilla: using it for this course work.</p>
+          <p>WinSCP: never used anywhere but willing to learn</p>
+          <p>CyberDuck: never used anywhere but willing to learn</p>
+        </td>
+      </tr>
+       
+        
+       </table>
+
+       <div >
+        <h2>References:</h2>
+        <p>1. <a target="_blank" href="https://www.w3schools.com/">W3 Schools</a></p>
+        <p>2. <a target="_blank" href="https://www.ChatGPT.com/"> ChatGPT</a></p>
+        <p>3. <a target="_blank" href="https://www.iconfinder.com/">Icon-Finder</a></p>
+        
+      </div>
+    </div>
+  
+  </body>
+</html>

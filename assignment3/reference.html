@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment3</title>
+    <link rel="stylesheet" href="styles/darktheme.css">
+
+</head>
+
+<body class="refbody">
+    <div class="refcontainer">
+        <h1 class="title">References & Others</h1>
+        <h2>Explaination for implementation of Requirement(2.4)</h2>
+        <h3>Option 1: create two HTML or PHP files, each with a dedicated CSS file</h3>
+        <p>I have created two Html pages, Index.html is the main file contains answers for assignment 3 integrated with
+            titlepage.css,
+            and another html file is reference.html which contains the references integrated with darktheme.css</p>
+
+        <h3>Option 2: create one HTML or PHP file with a mechanism to enable a visitor to select the CSS file to use
+        </h3>
+        <p>To implement this option, I have utilized a toggle button positioned at the top-left corner of the webpage.
+            Additionally, in the 'script.js' JavaScript file created for this assignment, I have developed a
+            method called 'changeToggleStyle()' which dynamically switches the CSS files based on the user's selection.
+        </p>
+   
+    <h3>Option 3: create one HTML or PHP file with a mechanism to automatically select the CSS file to use based on
+        current time or date</h3>
+    <p>To dynamically change css based on current time, in JS file added "windows.addEventlistner()" so that when
+        webpage loads
+        check for the time and select css file. If time is between morning 6 am to 6pm uses titlepage.css otherwise
+        picks darktheme.css</p>
+    
+    <h3>Similarities and differences for these options</h3>
+    <p>For all of these options, we need to specify the CSS filename in the HTML using the
+        <link> tag and the href attribute.
+        Additionally, for options 2 and 3, we are required to write JavaScript methods.
+        Option 2 involves creating a simple function with an if-else condition that responds to user clicks on the
+        toggle.
+        Option 3 follows a similar approach, but it includes an additional step where a 'Load' event listener is added
+        to select the CSS file based on the current time.
+    </p>
+    <h2>References</h2>
+    <li>[1] Tutorialspoint, "How to switch between multiple CSS stylesheets using JavaScript," Retrieved from https://www.tutorialspoint.com/how-to-switch-between-multiple-css-stylesheets-using-javascript</li>
+    <li>W3Schools. (n.d.). How to create a switch. Retrieved from https://www.w3schools.com/howto/howto_css_switch.asp</li>
+    <li>[1] "Different Stylesheet Pending the Time of Day," CSS-Tricks. [Online]. Available: https://css-tricks.com/snippets/javascript/different-stylesheet-pending-the-time-of-day/. [Accessed: Insert date accessed].</li>
+    <li>[1] D. Gourley and B. Totty, "HTTP: The Definitive Guide," O'Reilly Media, 2002.</li>
+    <li>W3Schools. (n.d.). W3.CSS Slideshow. Retrieved from https://www.w3schools.com/w3css/w3css_slideshow.asp</li>
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>

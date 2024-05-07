@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+        .container {
+            align-items: center;
+            text-align: center;
+            max-width: 90%;
+            /* Set your desired maximum width */
+            margin: 1 auto;
+            /* Center the container horizontally */
+            margin-top: 50px;
+            /* Adjust as needed */
+            padding: 100px;
+
+        }
+
+        h1 {
+            font-size: 32px;
+            /* Adjust font size as needed */
+            font-weight: bold;
+            color: #fa48a7;
+            /* Text color */
+            margin-bottom: 20px;
+            /* Bottom margin */
+            padding: 10px 0;
+            /* Padding around text */
+            text-align: center;
+            /* Center-align text */
+        }
+
+
+        h2 {
+            font-size: 24px;
+            /* Adjust font size as needed */
+            font-weight: bold;
+            color: #fc96df;
+            /* Text color */
+            margin-bottom: 15px;
+            /* Bottom margin */
+            padding: 8px 0;
+            /* Padding around text */
+            text-align: left;
+            /* Left-align text */
+        }
+
+        .button-2 {
+            background-color: #ea4c89;
+            border-radius: 8px;
+            border-style: none;
+            box-sizing: border-box;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+                sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            height: 40px;
+            line-height: 20px;
+            list-style: none;
+            margin: 0;
+            outline: none;
+            padding: 10px 16px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            transition: color 100ms;
+            vertical-align: baseline;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-2:hover,
+        .button-2:focus {
+            background-color: #f082ac;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #292b2b;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #c0f3fd;
+        }
+
+        /* Hover effect */
+        tr:hover {
+            background-color: #b6e3ee;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #b3e2f6;
+            /* Button color */
+            color: #141414;
+            /* Text color */
+            text-decoration: none;
+            /* Remove underline */
+            border-radius: 5px;
+            /* Rounded corners */
+            border: none;
+            /* Remove border */
+            cursor: pointer;
+            /* Cursor style */
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .chart {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .bar-chart {
+
+            height: 400px;
+            /* Adjust height as needed */
+            width: 400px;
+        }
+
+        .pie-chart {
+
+            height: 400px;
+            /* Adjust height as needed */
+            width: 400px
+        }
+
+        .average-values {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartcontainer",
+                {
+                    title: {
+                        text: "CMMI Level"
+                    },
+                    data: [
+
+                        {
+                            dataPoints: [
+                                { x: 1, y: 4, label: "Thompson" },
+                                { x: 2, y: 4, label: "Frank" },
+                                { x: 3, y: 4, label: "Thomas" },
+                                { x: 4, y: 4, label: "Jadyn" },
+                                { x: 5, y: 3, label: "Pierre" },
+
+                            ]
+                        }
+                    ]
+                });
+            var pchart = new CanvasJS.Chart("pieChart",
+                {
+                    title: {
+                        text: "TRL Level"
+                    },
+                    legend: {
+                        maxWidth: 350,
+                        itemWidth: 120
+                    },
+                    data: [
+                        {
+                            type: "pie",
+                            showInLegend: true,
+                            legendText: "{indexLabel}",
+                            dataPoints: [
+                                { y: 5, indexLabel: "Thompson" },
+                                { y: 8, indexLabel: "Frank" },
+                                { y: 8, indexLabel: "Thomas" },
+                                { y: 8, indexLabel: "Jadyn" },
+                                { y: 8, indexLabel: "Pierre" },
+
+                            ]
+                        }
+                    ]
+                });
+
+            chart.render();
+            pchart.render();
+        }
+    </script>
+    <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+</head>
+
+<body>
+    <center>
+        <h1 class="title">Assignment 8</h1>
+    </center>
+    <h2>R0. Review feedback you have received for Project 1.</h2>
+    <table>
+        <tr>
+            <th>Reviewer</th>
+            <th>Reviewer feedback</th>
+            <th>Response Given</th>
+
+        </tr>
+        <tr>
+            <td>Frankely Rodriguez Amparo </td>
+            <td>
+                <p>It is incredible to see how APIs can make our webpage even more extraordinary.</p>
+
+                <p>I think level 3 for this project is fair since this project still being evaluate and not being
+                    deployed in a real environment yet</p>
+                <p>With a little bit more time, this project can achieve the top rank in this scaling system.</p>
+                <p>Will you integrate more API to your project in the future?</p>
+
+            </td>
+
+            <td>Thank you so much Frank, for taking your time to review it. I am thinking to implement own APIs and play
+                around it.</td>
+        </tr>
+        <tr>
+            <td>Q Thompson </td>
+            <td>
+                <p>Overall, good to implementing these API's. Thank you for this presentation as it gives me more
+                    insight on how to better integrate my API's</p>
+                <p>APIs (Application Programming Interfaces) are essential components of modern software development
+                    and play a crucial role in enabling communication and interaction between different software
+                    systems, applications, and services</p>
+                <p>Maybe a demonstration of the different cloud vendors such as GCP, AWS, etc.</p>
+                <p>How frequently do you think API's are updated or maintained, say after we already implemented API's
+                    on the wesbite, do you think new versions of the API will be automatically updated or do you think
+                    we would have to generate a whole new API key?</p>
+            </td>
+
+            <td>Thanks for taking your time to review my project Thompson. I have used two APIs one is rapid API which
+                has API key access and US gov health API is open and no API key Access. I didnt see any issues with open
+                APIs, on the other hand rapid APIs , I faced intermittent issues with maintenance but it got restored
+                quickly. I didnt had to change API keys unless i want to change it.</td>
+        </tr>
+        <tr>
+            <td>Thomas Sullivan  </td>
+
+            <td>
+                <p>You followed the parameters of the project requirements exactly as asked and did well to accomplish
+                    the goals of your project research.</p>
+                <p>The three implementations are designed well and therefore I have no recommendations</p>
+                <p>Which implementation do you believe worked best to integrate the APIs?</p>
+            </td>
+            <td>Thank you, Thomas for your feedback. Python implementation was quite interesting because its kind a
+                whole application with client server and with lot advantages with security and API key masking.</td>
+        </tr>
+        <tr>
+            <td>Jadyn Reilly </td>
+            <td>
+                <p>Mahalakshmi - your project is truly impressive and demonstrates a comprehensive understanding of API
+                    integration in web applications.
+                    It is evident you put a lot of thought and effort into your project. Awesome job!</p>
+                <p>To further enrich your project in the future you could consider advancing the user experience of the
+                    Symptom Checker feature by providing more detailed follow-up questions based on the selected
+                    symptoms leading to more personalized results.</p>
+                <p>What inspired you to center your focus on healthcare API’s?</p>
+            </td>
+
+            <td>Thanks very much for your feedback, Jadyn. Sure I will improve on parts that you have mentioned above. I
+                chose health care domain because I had prior working experience and also I can find free US gov health
+                APIs.</td>
+        </tr>
+        <tr>
+            <td>Pierre Gustave</td>
+            <td>All three implementations work as expected. How difficult was it to adapt the API to two different
+                programming languages?</td>
+            <td>Thanks very much Pierre, for taking your time to review my project. Adapating API integrations with
+                different languages didnt seem tough and API methods, language based libraries we can find it online.
+            </td>
+        </tr>
+        <tr>
+            <td>Wilkenson Hilarion  </td>
+            <td>Good job, I think every project should take an API approach,
+                and I've seen a lot of engineer creating coupled software, which I think is a very bad approach to
+                developing software.</td>
+            <td>Thanks very much Wilkenson, for taking your time to review my project. As you said APIs provides ease of
+                integration in software development. </td>
+        </tr>
+
+    </table>
+
+    <h2>R1.The average CMMI maturity level and NTR Level of Project 1 work based on feedback received</h2>
+    <div class="container">
+        <div class="chart bar-chart">
+            <div id="chartcontainer"></div>
+        </div>
+        <div class="chart pie-chart">
+            <div id="pieChart"></div>
+        </div>
+
+    </div>
+    <div>
+        <h2>Average CMMI & TRL Values</h2>
+        <p>CMMI: <span id="cmmiValue">3</span></p>
+        <p>TRL: <span id="trlValue">7</span></p>
+    </div>
+    <h2>R2. The current US-CERT 3-2-1 Data Backup status of your CSC 543 portfolio</h2>
+    <ul>
+        <li>3 copies of data: Currently, I haven't created three copies of the CSC543 coursework.</li>
+        <li>2 different storage types: At present, I have stored it on my personal laptop and on OneDrive.</li>
+        <li>1 offsite copy: I am in the process of updating all the coursework onto GitHub.</li>
+    </ul>
+    <h2>R3. One or more paths to optimizing your CSC 543 portfolio US-CERT 3-2-1 Data Backup status</h2>
+    <ul>
+        <li>Increasing Redundancy: I plan to create additional copies of my CSC 543 coursework to ensure redundancy.
+            Currently, I only have one backup copy, but I aim to implement a system where I maintain at least three
+            copies of the data.</li>
+
+        <li>Diversifying Storage Types: I intend to diversify the storage types used for my backup. While I currently
+            store my coursework on my personal laptop and OneDrive, I plan to explore additional options such as
+            external hard drives or cloud storage services to enhance data resilience.</li>
+
+        <li>Regular Backup Checks: I recognize the importance of regularly verifying the integrity of my backups. I will
+            establish a schedule for conducting backup checks and audits to ensure that my backup system is functioning
+            effectively and that my data is adequately protected.</li>
+    </ul>
+    <h2>R4: Describe the current NIST CSF2 PR.DS compliance of your CSC 543 portfolio</h2>
+    <ul>
+        <li>PR.DS-01: Data-at-Rest Protection: The confidentiality, integrity, and availability of data-at-rest are
+            protected within my CSC 543 portfolio. All critical files and documents are safeguarded to ensure their
+            security.</li>
+
+        <li>PR.DS-02: Data-in-Transit Protection: The confidentiality, integrity, and availability of data-in-transit
+            are adequately protected during transmission within my CSC 543 portfolio.</li>
+
+        <li>PR.DS-10: Data-in-Use Protection: Measures are in place to protect the confidentiality, integrity, and
+            availability of data-in-use within my CSC 543 portfolio. This includes ensuring that sensitive data is
+            accessed and processed securely.</li>
+
+        <li>PR.DS-11: Data Backup Management: Backups of data are regularly created, protected, maintained, and tested
+            within my CSC 543 portfolio to ensure the availability and integrity of critical information.</li>
+    </ul>
+
+    <h2>R5: One or more paths to optimizing NIST CSF2 PR.DS compliance of your CSC 543 portfolio:</h2>
+    <ul>
+        <li>Enhancing Data Protection for Data-in-Transit (PR.DS-02): To further enhance compliance with PR.DS-02, I
+            plan to strengthen encryption protocols and implement additional security measures for data transmissions,
+            ensuring the confidentiality, integrity, and availability of data-in-transit.</li>
+
+        <li>Improving Data Backup Management (PR.DS-11): Researching and implementing more robust backup solutions will
+            optimize compliance with PR.DS-11. This includes refining backup processes, enhancing data protection
+            measures, and implementing regular testing procedures to ensure the effectiveness of backups.</li>
+    </ul>
+
+    <h2>Demo Video</h2>
+    <video width="640" height="360" controls>
+        <source src="ass8.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+
+</body>
+
+</html>

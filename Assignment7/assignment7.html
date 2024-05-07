@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+        .container {
+            align-items: center;
+            text-align: center;
+            max-width: 90%;
+            /* Set your desired maximum width */
+            margin: 1 auto;
+            /* Center the container horizontally */
+            margin-top: 50px;
+            /* Adjust as needed */
+            padding: 100px;
+
+        }
+
+        h1 {
+            font-size: 32px;
+            /* Adjust font size as needed */
+            font-weight: bold;
+            color: #fa48a7;
+            /* Text color */
+            margin-bottom: 20px;
+            /* Bottom margin */
+            padding: 10px 0;
+            /* Padding around text */
+            text-align: center;
+            /* Center-align text */
+        }
+
+
+        h2 {
+            font-size: 24px;
+            /* Adjust font size as needed */
+            font-weight: bold;
+            color: #fc96df;
+            /* Text color */
+            margin-bottom: 15px;
+            /* Bottom margin */
+            padding: 8px 0;
+            /* Padding around text */
+            text-align: left;
+            /* Left-align text */
+        }
+
+        .button-2 {
+            background-color: #ea4c89;
+            border-radius: 8px;
+            border-style: none;
+            box-sizing: border-box;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+                sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            height: 40px;
+            line-height: 20px;
+            list-style: none;
+            margin: 0;
+            outline: none;
+            padding: 10px 16px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            transition: color 100ms;
+            vertical-align: baseline;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-2:hover,
+        .button-2:focus {
+            background-color: #f082ac;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1 class="title">Assignment 7</h1>
+    </center>
+    <h2>Particulate matter</h2>
+    <p>Particulate matter (PM) refers to tiny particles of solids or liquids that are suspended in the air we breathe.
+        These particles can vary in size and composition, ranging from dust and pollen to soot and aerosols.
+        PM can be produced by natural sources like dust storms or wildfires, but human activities such as vehicle
+        emissions, industrial processes, and burning of fossil fuels are major contributors.
+        Inhalation of PM can lead to respiratory and cardiovascular issues, especially with long-term exposure, causing
+        asthma, bronchitis, heart disease, and even premature death.</p>
+    <h2>Ozone Health</h2>
+    <p>
+
+        Ground-level ozone (O3) is formed from pollutants like nitrogen oxides (NOx) and volatile organic compounds
+        (VOCs) in sunlight.
+        It can cause respiratory issues (coughing, chest pain), decrease lung function, and worsen asthma.
+        Ozone levels are measured in parts per billion (ppb) or micrograms per cubic meter (µg/m³) using air quality
+        monitoring stations.
+        High ozone concentrations prompt health advisories and impact vulnerable groups like the elderly and those with
+        respiratory conditions
+    </p>
+    <div class="container">
+        <div id="map"></div>
+        <br>
+        <button type="button" class="button-2" onclick="setMarketData2009()">10-11-2009</button>
+        <button type="button" class="button-2" onclick="setMarketData2015()">10-11-2015</button>
+        <button type="button" class="button-2" onclick="setMarketData2021()">10-11-2021</button>
+    </div>
+
+    <br>
+    <br>
+    <h2>Demo Video</h2>
+    <video width="640" height="360" controls>
+        <source src="assn7.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <h2> References</h2>
+    <p>Leaflet. (n.d.). API Reference. Retrieved from https://leafletjs.com/reference.html</p>
+    <p>National Park Service. (n.d.). National Park Service. Retrieved from https://www.nps.gov/index.htm</p>
+    <p>National Park Service. (n.d.). Air quality - park conditions and trends. Retrieved from
+        https://www.nps.gov/subjects/air/park-conditions-trends.htm?</p>
+    <p>National Park Service. (n.d.). Visitation numbers. Retrieved from
+        https://www.nps.gov/aboutus/visitation-numbers.htm</p>
+
+    <script>
+        var map = L.map('map').setView([37.8651, -119.5383], 2); // Centered on Glacier National Park with zoom level 7
+
+        // Add a tile layer (e.g., OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+
+
+        // Define array of markers with coordinates and popup content
+        var markers = [
+            {
+                coordinates: [48.7596, -113.7870],
+                name: 'Glacier National Park (2009)',
+                description: 'Glacier National Park is located in the state of Montana, USA, near the Canada–US border. It is renowned for its stunning alpine landscapes, glaciers, lakes, and diverse wildlife including grizzly bears and mountain goats. The park offers numerous hiking trails and scenic drives, such as the Going-to-the-Sun Road, which traverses the parks mountainous terrain',
+                visitorPopulation: '2,030,000',
+                ParticaulateMatter: '15.5',
+                ozoneHealth: '3.1 ppm-hrs'
+            },
+            {
+                coordinates: [44.4280, -110.5885],
+                name: 'Yellow Stone National Park (2009)',
+                description: "Yellowstone National Park sits on top of a dormant volcano and is home to more geysers and hot springs than any other place on earth. Wonders abound at this truly unique national park, from sites like the Yellowstone Grand Canyon to wildlife like America's largest buffalo herd, grizzly bears, and wolves.",
+                visitorPopulation: '3,300,000',
+                ParticaulateMatter: '8.4',
+                ozoneHealth: '10.2 ppm-hrs'
+            },
+            {
+                coordinates: [37.8651, -119.5383],
+                name: 'Yosemite National Park (2009)',
+                description: "The park is noted for its outstanding scenery—including peaks, canyons, cliffs, domes, rivers, lakes, immense waterfalls, lush green meadows, wildlife, and forests. Yosemite National Park contains a unique assemblage of massive granite domes and glacial features, which resulted from a rich geologic history.",
+                visitorPopulation: '3,900,000',
+                ParticaulateMatter: '62',
+                ozoneHealth: '31.3 ppm-hrs'
+            },
+            {
+                coordinates: [36.2679, -112.3535],
+                name: 'Grand Canyon National Park (2009)',
+                description: "Is a World Heritage Site, encompasses 1,218,375 acres and lies on the Colorado Plateau in northwestern Arizona. The land is semi-arid and consists of raised plateaus and structural basins typical of the southwestern United States.",
+                visitorPopulation: '4,350,000',
+                ParticaulateMatter: '48.9',
+                ozoneHealth: '19.8 ppm-hrs'
+            },
+            {
+                coordinates: [63.2828, -150.7894], popupText: 'Denali National Park',
+                name: 'Denali National Park (2009)',
+                description: "Two million acres of designated wilderness preserve wilderness character and a vast, intact ecosystem. Denali is home to 39 species of mammals, 169 species of birds, and 1 lonely species of amphibian.",
+                visitorPopulation: '358,041',
+                ParticaulateMatter: '11.5',
+                ozoneHealth: '2.7 ppm-hrs'
+            }
+        ];
+        var markers2009 = [
+            {
+                coordinates: [48.7596, -113.7870],
+                name: 'Glacier National Park (2009)',
+                description: 'Glacier National Park is located in the state of Montana, USA, near the Canada–US border. It is renowned for its stunning alpine landscapes, glaciers, lakes, and diverse wildlife including grizzly bears and mountain goats. The park offers numerous hiking trails and scenic drives, such as the Going-to-the-Sun Road, which traverses the parks mountainous terrain',
+                visitorPopulation: '2,030,000',
+                ParticaulateMatter: '15.5',
+                ozoneHealth: '3.1 ppm-hrs'
+            },
+            {
+                coordinates: [44.4280, -110.5885],
+                name: 'Yellow Stone National Park (2009)',
+                description: "Yellowstone National Park sits on top of a dormant volcano and is home to more geysers and hot springs than any other place on earth. Wonders abound at this truly unique national park, from sites like the Yellowstone Grand Canyon to wildlife like America's largest buffalo herd, grizzly bears, and wolves.",
+                visitorPopulation: '3,300,000',
+                ParticaulateMatter: '8.4',
+                ozoneHealth: '10.2 ppm-hrs'
+            },
+            {
+                coordinates: [37.8651, -119.5383],
+                name: 'Yosemite National Park (2009)',
+                description: "The park is noted for its outstanding scenery—including peaks, canyons, cliffs, domes, rivers, lakes, immense waterfalls, lush green meadows, wildlife, and forests. Yosemite National Park contains a unique assemblage of massive granite domes and glacial features, which resulted from a rich geologic history.",
+                visitorPopulation: '3,900,000',
+                ParticaulateMatter: '62',
+                ozoneHealth: '31.3 ppm-hrs'
+            },
+            {
+                coordinates: [36.2679, -112.3535],
+                name: 'Grand Canyon National Park (2009)',
+                description: "Is a World Heritage Site, encompasses 1,218,375 acres and lies on the Colorado Plateau in northwestern Arizona. The land is semi-arid and consists of raised plateaus and structural basins typical of the southwestern United States.",
+                visitorPopulation: '4,350,000',
+                ParticaulateMatter: '48.9',
+                ozoneHealth: '19.8 ppm-hrs'
+            },
+            {
+                coordinates: [63.2828, -150.7894], popupText: 'Denali National Park',
+                name: 'Denali National Park (2009)',
+                description: "Two million acres of designated wilderness preserve wilderness character and a vast, intact ecosystem. Denali is home to 39 species of mammals, 169 species of birds, and 1 lonely species of amphibian.",
+                visitorPopulation: '358,041',
+                ParticaulateMatter: '11.5',
+                ozoneHealth: '2.7 ppm-hrs'
+            }
+            // Add more locations as needed
+        ];
+        var markers2015 = [
+            {
+                coordinates: [48.7596, -113.7870],
+                name: 'Glacier National Park (2015)',
+                description: 'Glacier National Park is located in the state of Montana, USA, near the Canada–US border. It is renowned for its stunning alpine landscapes, glaciers, lakes, and diverse wildlife including grizzly bears and mountain goats. The park offers numerous hiking trails and scenic drives, such as the Going-to-the-Sun Road, which traverses the parks mountainous terrain',
+                visitorPopulation: '2,370,000',
+                ParticaulateMatter: '16.5',
+                ozoneHealth: '3.5 ppm-hrs'
+            },
+            {
+                coordinates: [44.4280, -110.5885], popupText: 'yellowstone national park',
+                name: 'Yellow Stone National Park (2015)',
+                description: "Yellowstone National Park sits on top of a dormant volcano and is home to more geysers and hot springs than any other place on earth. Wonders abound at this truly unique national park, from sites like the Yellowstone Grand Canyon to wildlife like America's largest buffalo herd, grizzly bears, and wolves.",
+                visitorPopulation: '4,100,000',
+                ParticaulateMatter: '10.2',
+                ozoneHealth: '8.6 ppm-hrs'
+            },
+            {
+                coordinates: [37.8651, -119.5383],
+                name: 'Yosemite National Park (2015)',
+                description: "The park is noted for its outstanding scenery—including peaks, canyons, cliffs, domes, rivers, lakes, immense waterfalls, lush green meadows, wildlife, and forests. Yosemite National Park contains a unique assemblage of massive granite domes and glacial features, which resulted from a rich geologic history.",
+                visitorPopulation: '4,294,381',
+                ParticaulateMatter: '115',
+                ozoneHealth: '24.0 ppm-hrs'
+            },
+            {
+                coordinates: [36.2679, -112.3535],
+                name: 'Grand Canyon National Park (2015)',
+                description: "Is a World Heritage Site, encompasses 1,218,375 acres and lies on the Colorado Plateau in northwestern Arizona. The land is semi-arid and consists of raised plateaus and structural basins typical of the southwestern United States.",
+                visitorPopulation: '5,520,000',
+                ParticaulateMatter: '6.6',
+                ozoneHealth: '17.5 ppm-hrs'
+            },
+            {
+                coordinates: [63.2828, -150.7894], popupText: 'Denali National Park',
+                name: 'Denali National Park (2015)',
+                description: "Two million acres of designated wilderness preserve wilderness character and a vast, intact ecosystem. Denali is home to 39 species of mammals, 169 species of birds, and 1 lonely species of amphibian.",
+                visitorPopulation: '560,757',
+                ParticaulateMatter: '8.5',
+                ozoneHealth: '3.3 ppm-hrs'
+            }
+            // Add more locations as needed
+        ];
+        var markers2021 = [
+            {
+                coordinates: [48.7596, -113.7870],
+                name: 'Glacier National Park (2021)',
+                description: 'Glacier National Park is located in the state of Montana, USA, near the Canada–US border. It is renowned for its stunning alpine landscapes, glaciers, lakes, and diverse wildlife including grizzly bears and mountain goats. The park offers numerous hiking trails and scenic drives, such as the Going-to-the-Sun Road, which traverses the parks mountainous terrain',
+                visitorPopulation: '3,080,000',
+                ParticaulateMatter: '21.4',
+                ozoneHealth: '3.5 ppm-hrs'
+            },
+            {
+                coordinates: [44.4280, -110.5885], popupText: 'yellowstone national park',
+                name: 'Yellow Stone National Park (2021)',
+                description: "Yellowstone National Park sits on top of a dormant volcano and is home to more geysers and hot springs than any other place on earth. Wonders abound at this truly unique national park, from sites like the Yellowstone Grand Canyon to wildlife like America's largest buffalo herd, grizzly bears, and wolves.",
+                visitorPopulation: '4,860,000',
+                ParticaulateMatter: '16.8',
+                ozoneHealth: '7.8 ppm-hrs'
+            },
+            {
+                coordinates: [37.8651, -119.5383],
+                name: 'Yosemite National Park (2021)',
+                description: "The park is noted for its outstanding scenery—including peaks, canyons, cliffs, domes, rivers, lakes, immense waterfalls, lush green meadows, wildlife, and forests. Yosemite National Park contains a unique assemblage of massive granite domes and glacial features, which resulted from a rich geologic history.",
+                visitorPopulation: '3,343,988',
+                ParticaulateMatter: '229',
+                ozoneHealth: '22.4 ppm-hrs'
+            },
+            {
+                coordinates: [36.2679, -112.3535],
+                name: 'Grand Canyon National Park (2021)',
+                description: "Is a World Heritage Site, encompasses 1,218,375 acres and lies on the Colorado Plateau in northwestern Arizona. The land is semi-arid and consists of raised plateaus and structural basins typical of the southwestern United States.",
+                visitorPopulation: '4,530,000',
+                ParticaulateMatter: '5.9',
+                ozoneHealth: '16.2 ppm-hrs'
+            },
+            {
+                coordinates: [63.2828, -150.7894], popupText: 'Denali National Park',
+                name: 'Denali National Park (2021)',
+                description: "Two million acres of designated wilderness preserve wilderness character and a vast, intact ecosystem. Denali is home to 39 species of mammals, 169 species of birds, and 1 lonely species of amphibian.",
+                visitorPopulation: '229,521',
+                ParticaulateMatter: '10.5',
+                ozoneHealth: '2.7 ppm-hrs'
+            }
+
+            // Add more locations as needed
+        ];
+        // Loop through the markers array to add markers to the map
+        markers.forEach(function (marker) {
+            map.closePopup();
+            var popupContent = `<b>${marker.name}</b> <br><br>
+                                <b>Description:</b>${marker.description}<br>
+                                <b>Visitor Population:</b>${marker.visitorPopulation}<br>
+                                <b>Particulate Matter:</b>${marker.ParticaulateMatter}<br>
+                                <b>Ozone Health:</b>${marker.ozoneHealth}<br>
+                                `;
+
+            // Create marker with custom icon and bind popup
+            L.marker(marker.coordinates).addTo(map)
+                .bindPopup(popupContent);
+        });
+        function setMarketData2009() {
+            map.closePopup();
+            markers2009.forEach(function (marker) {
+                var popupContent = `<b>${marker.name}</b> <br><br>
+                                <b>Description:</b>${marker.description}<br>
+                                <b>Visitor Population:</b>${marker.visitorPopulation}<br>
+                                <b>Particulate Matter:</b>${marker.ParticaulateMatter}<br>
+                                <b>Ozone Health:</b>${marker.ozoneHealth}<br>
+                                `;
+
+                // Create marker with custom icon and bind popup
+                L.marker(marker.coordinates).addTo(map)
+                    .bindPopup(popupContent);
+            })
+        };
+
+        function setMarketData2015() {
+            markers2015.forEach(function (marker) {
+                map.closePopup();
+                var popupContent = `<b>${marker.name}</b> <br><br>
+                                <b>Description:</b>${marker.description}<br>
+                                <b>Visitor Population:</b>${marker.visitorPopulation}<br>
+                                <b>Particulate Matter:</b>${marker.ParticaulateMatter}<br>
+                                <b>Ozone Health:</b>${marker.ozoneHealth}<br>
+                                `;
+
+                // Create marker with custom icon and bind popup
+                L.marker(marker.coordinates).addTo(map)
+                    .bindPopup(popupContent);
+            })
+        };
+
+        function setMarketData2021() {
+            markers2021.forEach(function (marker) {
+                map.closePopup();
+                var popupContent = `<b>${marker.name}</b> <br><br>
+                                <b>Description:</b>${marker.description}<br>
+                                <b>Visitor Population:</b>${marker.visitorPopulation}<br>
+                                <b>Particulate Matter:</b>${marker.ParticaulateMatter}<br>
+                                <b>Ozone Health:</b>${marker.ozoneHealth}<br>
+                                `;
+
+                // Create marker with custom icon and bind popup
+                L.marker(marker.coordinates).addTo(map)
+                    .bindPopup(popupContent);
+            })
+        };
+    </script>
+
+</body>
+
+</html>

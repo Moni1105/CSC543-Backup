@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Content</title>
+    <link rel="stylesheet" href="styles/titlepage.css" id="style">
+</head>
+
+<body>
+    <label class="toggletext">Toggle here for different theme</label>
+    <label class="switch">
+        <input type="checkbox" onclick="changeToggleStyle()">
+        <span class="slider round"></span>
+    </label>
+
+    <div class="container">
+
+        <div class="myslide fade">
+            <div>
+                <h1 class="title">Assignment 3</h1>
+
+                <h2 class="author">Mahalakshmi Somasundaram </h2>
+
+                <h3 class="info">CSC 543: Web Programming <br> Computer Science Department <br>
+                    <span class="University"> Southern Connecticut State University</span>
+                </h3>
+            </div>
+        </div>
+        <div class="myslide fade">
+            <div>
+                <h1 class="title">Temperature Conversion</h1>
+                <label for="From">From:</label>
+                <select name="FromTemperature" id="From">
+                    <option value="Fahrenheit">Fahrenheit</option>
+                    <option value="Celsius">Celsius</option>
+                    <option value="Kelvin">Kelvin</option>
+                    <option value="Rankine">Rankine</option>
+                </select>
+                <br>
+                <label>Enter the number</label>
+                <input type="text" id="UserInput" placeholder="Enter the valid number">
+                <br>
+                <label for="To">To:</label>
+                <select name="toTemperature" id="to">
+                    <option value="Celsius">Celsius</option>
+                    <option value="Fahrenheit">Fahrenheit</option>
+                    <option value="Kelvin">Kelvin</option>
+                    <option value="Rankine">Rankine</option>
+                </select>
+                <br>
+                <button name="converter" onclick="temperatureConverter()">Convert</button>
+                <br>
+                <p class="info">Output : <span id="outputVal"></span></p>
+                <br><br>
+            </div>
+        </div>
+        <div class="myslide fade">
+            <h1 class="title">Requirement 3</h1>
+            <h3>1.My awareness about the client and server components?</h3>
+            <p class="info">I am aware that the client-side refers to the browser or frontend of an application,
+                where users can input data or view the output retrieved from the server.
+                The server is where all the processing of the application occurs.</p>
+            <h3>2.My knowledge on client?</h3>
+            <p class="info">Client-side components reside on the application layer where end users can interact with the
+                application.
+                When hosting our application in a browser, it stores the application's HTML, CSS, and JavaScript files.
+                These files can be developed using frameworks like Angular, React, or others</p>
+            <h3>3.My knowledge on server?</h3>
+            <p class="info">Server processes requests from clients,executes business logics, interacts with databases,
+                and generates dynamic content to be sent back to the client.
+                we can use Programming languges such as Python, PHP, Java, Ruby etc with frameworks like Flask, Django,
+                SpringBoot etc to create server side code.
+            </p>
+            <h3>4.Where can we learn more about the server?</h3>
+            <p class="info">We can explore many online tutorials, youtube videos, books, get hands on by installing the
+                software and follow official documentations.
+            </p>
+            <h3>5.Describe the interactions among client and server in your web applications and the languages used to
+                define them?</h3>
+            <p class="info">The interaction between the client and server occurs via HTTP requests and responses. When
+                an end user interacts with the application, the client sends a request to the server. Upon receiving the
+                request, the server performs the necessary operations based on the user's action. Used JavaScript
+                handling client-side interactions and Python managing server-side operations.</p>
+
+        </div>
+        <div class="myslide fade">
+            <h1 class="title">Requirement 4</h1>
+            <h3>1.My awareness of markup and scripting languages integrated for a purpose?</h3>
+            <p class="info">Markup languages are used for design and developing page layouts, user interface components for web application. 
+                This can be integrated with styling language(CSS) for improve the UI design and scripting languages for processing some business logic and retrieving result from server.</p>
+                <h3>2.The role of HTML in temperature converter implementation?</h3>
+            <p class="info">
+                In the temperature converter, I have utilized HTML to create the web page. I've incorporated dropdown menus for selecting the units of temperature conversion, included a textbox to capture user input,
+                 and integrated an output label to display the resulting conversion</p>
+                 <h3>3.The role of CSS in temperature converter implementation?</h3>
+            <p class="info">I have used CSS to style the color, font, spacing, sizing, alignment each web element scpecified in the temperature converter application.</p>
+            <h3>4.The role of JavaScript in temperature converter implementation?</h3>
+            <p class="info">JavaScript is used for computing operations on browser. created js function for computing temperature unit conversion, to toggle between two different CSS file and also used for silding through each section in html page.</p>
+
+
+        </div>
+        <div class="myslide fade">
+            <h1 class="title">Requirement 5</h1>
+            <a href="reference.html"> Please click here for references and other explanations</a>
+        </div>
+
+
+    </div>
+    <a class="prev" onclick="plusSlides(-1)">Previous</a>
+    <a class="next" onclick="plusSlides(1)">Next</a>
+
+
+    <script src="scripts/scripts.js"></script>
+</body>
+
+</html>

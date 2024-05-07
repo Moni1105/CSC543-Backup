@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    align-items: center;
+}
+
+.container {
+    align-items: center;
+    text-align: center;
+    max-width: 600px;
+    /* Set your desired maximum width */
+    margin: 0 auto;
+    /* Center the container horizontally */
+    margin-top: 50px;
+    /* Adjust as needed */
+    padding: 100px;
+    border-radius: 50px;
+    background-color: #c2eff3;
+    box-shadow: 0 0 10px rgba(230, 223, 223, 0.1);
+}
+
+.title {
+    color: darkblue;
+    font-size: xx-large;
+    margin-top: 20px;
+
+}
+
+.author {
+    font-style: italic;
+    color: blue;
+    margin-top: 20px;
+}
+
+.info {
+    margin-top: 20px;
+    color: #5372a9;
+    margin-top: 20px;
+}
+
+.university {
+    color: #8080FF;
+    margin-top: 20px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+button {
+    margin-top: 20px;
+    background: transparent;
+
+}
+
+
+.toggletext {
+    color: rgb(4, 41, 61);
+}
+
+select,
+input {
+    padding: 10px;
+    margin: 20px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.link-container {
+    justify-content: center;
+    display: flex; /* Use flexbox to arrange links horizontally */
+}
+.link-container a {
+    color: #190aee;
+    margin-right: 10px; /* Add some spacing between links */
+}
+
+.explanation {
+    display: none;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+    
+}
+
+.expandButton {
+    margin-top: 10px;
+    cursor: pointer;
+    color: rgb(109, 81, 247);
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+  
+    
+
+
+
